@@ -22,19 +22,26 @@
     <div class="swiper">
 
         <nav>
-            <a href="index.html" class="home-btn">
-                <i class="ri-home-4-line"></i> Home
-            </a>
-            <a href="newpage.html" class="hover-underline">Streets</a>
-            <a href="darkacademia.html" class="hover-underline">Dark Academia</a>
-            <a href="oldmoney.html" class="hover-underline">Old Money</a>
-            <a href="#" class="hover-underline" style="margin-left: auto;">
-                <i class="ri-search-line"></i> Search
-            </a>
-            <a href="#" class="hover-underline">My Account</a>
-            <a href="#" class="hover-underline">
-                <i class="ri-shopping-bag-fill"></i>
-            </a>
+            <div class="nav-left">
+                <div class="nav-links">
+                    <a href="index.html" class="home-btn">
+                        <i class="ri-home-4-line"></i> Home
+                    </a>
+                    <a href="newpage.html" class="hover-underline">STREETS</a>
+                    <a href="darkacademia.html" class="hover-underline">DARK ACADEMIA</a>
+                    <a href="oldmoney.html" class="hover-underline">OLD MONEY</a>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <a href="#" class="hover-underline">
+                    <i class="ri-search-line"></i> Search
+                </a>
+                <a href="#" class="hover-underline">My Account</a>
+                <a href="#" class="hover-underline">
+                    <i class="ri-shopping-bag-fill"></i>
+                </a>
+            </div>
         </nav>
         <div class="swiper-wrapper">
             <div class="swiper-slide" style="background: linear-gradient(to bottom, #FE783D, #121826);">
@@ -47,7 +54,7 @@
                     <span>This versatile ensemble suits city streets <br> and outdoor escapes Alike.</span>
                 </div>
                 <div class="pricing">
-                    <p><h3>BURNT CARAMEL BLAZE</h3></p>
+                    <p><h3><b>BURNT CARAMEL BLAZE</b></h3></p>
                     <span><br> Featuring rugged cargo pants, a classic logo hoodie,<br> and vintage-inspired sneakers, is perfect for those<br> who value both style and utility in their wardrobe.</span>
                     
                     <H3>₹12499.00</H3>
@@ -67,7 +74,7 @@
                     <span>This versatile ensemble suits city streets <br> and outdoor escapes Alike.</span>
                 </div>
                 <div class="pricing">
-                    <p><h3>SAGE MIST</h3></p>
+                    <p><h3><b>SAGE MIST</b></h3></p>
                     <span><br> Featuring rugged cargo pants, a classic logo hoodie,<br> and vintage-inspired sneakers, is perfect for those<br> who value both style and utility in their wardrobe.</span>
                     
                     <h3>₹15499.00</h3>
@@ -89,7 +96,7 @@
                     <span>This versatile ensemble suits city streets <br> and outdoor escapes Alike.</span>
                 </div>
                 <div class="pricing">
-                    <p><h3>TWILIGHT PLUM</h3></p>
+                    <p><h3><b>TWILIGHT PLUM</b></h3></p>
                     <span><br> Featuring rugged cargo pants, a classic logo hoodie,<br> and vintage-inspired sneakers, is perfect for those<br> who value both style and utility in their wardrobe.</span>
                     
                     
@@ -118,8 +125,21 @@
                 </div>
             </div>
         </div>
-        <div class="scroll">Scroll Down <i class="ri-arrow-down-s-line"></i></div>
-        <div class="social"><a href="#">ESSENTIAL</a> <a href="#">SIGNATURE</a> <a href="#">EXCLUSIVE</a></div>
+        <div class="scroll"><i class="ri-arrow-down-s-line"></i></div>
+        <div class="social">
+            <a href="#" class="social-icon">
+                <i class="ri-instagram-line"></i>
+            </a>
+            <a href="#" class="social-icon">
+                <i class="ri-facebook-circle-line"></i>
+            </a>
+            <a href="#" class="social-icon">
+                <i class="ri-twitter-x-line"></i>
+            </a>
+            <a href="#" class="social-icon">
+                <i class="ri-youtube-line"></i>
+            </a>
+        </div>
         
     </div>
 
@@ -128,8 +148,8 @@
         integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="app.js"></script>
     <script>
+        // Swiper initialization
         var swiper = new Swiper('.swiper', {
             loop: true,
             spaceBetween: 0,
@@ -179,6 +199,7 @@
             }
         });
 
+        // Initial animations
         gsap.from(
             '.swiper-slide-active h2',
             { x: -200, opacity: 0, duration: 1, delay: 0.5 }
@@ -200,9 +221,90 @@
 
         gsap.from('.swiper-thumbs', {
             y: 20, opacity: 0, delay: 0.5
-        })
+        });
 
+        // Cart Popup Animation
+        function showCartPopup(productName) {
+            const popup = document.getElementById('cartPopup');
+            if (!popup) return;
+            
+            // Update product name
+            popup.querySelector('.product-name').textContent = productName;
+            
+            // Show popup
+            popup.classList.add('show');
+            
+            // Hide popup after 2.5 seconds
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 2500);
+        }
+
+        // Add click event to all Add to Cart buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const slide = this.closest('.swiper-slide');
+                const productName = slide.querySelector('.pricing h3').textContent;
+                const price = slide.querySelector('.pricing h3:last-of-type').textContent;
+                
+                // Add click effect to button
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+                
+                // Show popup with product name
+                showCartPopup(productName);
+                
+                // Store cart data
+                const cartItem = {
+                    name: productName,
+                    price: price,
+                    quantity: 1
+                };
+                
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart.push(cartItem);
+                localStorage.setItem('cart', JSON.stringify(cart));
+            });
+        });
+
+        // Add hover effects for buttons
+        document.querySelectorAll('.light-btn, .btn').forEach(button => {
+            button.addEventListener('mouseover', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+            });
+
+            button.addEventListener('mouseout', function() {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Initialize popup on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!document.getElementById('cartPopup')) {
+                console.warn('Cart popup element not found');
+            }
+        });
     </script>
+
+    <!-- Cart Popup -->
+    <div class="cart-popup" id="cartPopup">
+        <div class="popup-content">
+            <div class="popup-icon">
+                <i class="ri-shopping-bag-line"></i>
+                <div class="check-mark">✔</div>
+            </div>
+            <div class="popup-message">
+                <span class="product-name"></span>
+                <span class="success-text">Added to cart!</span>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

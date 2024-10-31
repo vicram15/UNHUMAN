@@ -18,26 +18,74 @@ body {
 }
 
 nav {
-  width: 80%;
+  width: 90%;
   display: flex;
-  gap: 40px;
-  font-size: 12px;
+  justify-content: space-between;
+  align-items: center;
   position: fixed;
   top: 10px;
-  right: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
+  padding: 15px 30px;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
 }
 
-nav a {
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-size:50px;
+}
+
+.home-btn {
   color: #fff;
   text-decoration: none;
   display: flex;
   align-items: center;
   gap: 5px;
+  font-size: 12px;
 }
 
-nav a.active { text-decoration: underline; }
-nav a i { font-size: 20px; }
+.hover-underline {
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  padding: 5px 0;
+  font-size: 12px;
+}
+
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: #fff;
+  left: 0;
+  bottom: 0;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.hover-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
 
 .swiper {
   width: 100%;
@@ -65,12 +113,14 @@ nav a i { font-size: 20px; }
 
 h2 {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 4%;
+  left: -4%;
   transform: rotate(90deg) translate(45%, 100%);
   font-family: "P22", sans-serif;
   font-size: 115px;
 }
+
+
 
 .info, .pricing {
   position: absolute;
@@ -78,18 +128,20 @@ h2 {
 }
 
 .info {
-  left: 14%;
+  left: 11%;
   bottom: 40%;
   line-height: 2;
 }
 
 .pricing {
-  right: 8%;
+  
+  left:70%;
 }
 
 .pricing p, .info p {
   font-weight: 600;
   margin-top: 10px;
+  
 }
 
 .pricing span, .info span {
@@ -104,15 +156,16 @@ h2 {
 .btn-block {
   display: flex;
   margin-top: 10px;
+  margin-left: -35px;
 }
 
 .btn, .light-btn {
-  padding: 2px 60px;
+  padding: 2px 40px;
   font-family: "Poppins", sans-serif;
   background: rgba(0,0,0,0.25);
   border: none;
   color: #d8c3c3;
-  font-size: 10px;
+  font-size: 16px;
   cursor: pointer;
   right: 50%;
   left: 50px;
@@ -122,8 +175,8 @@ h2 {
 
 .swiper-thumbs {
   position: fixed;
-  top: 85%;
-  right: 20%;
+  top: 90%;
+  right: 15%;
   z-index: 10;
   width: 200px;
   overflow: hidden;
@@ -141,8 +194,8 @@ h2 {
 }
 
 .scroll {
-  top: 80%;
-  right: 30%;
+  top: 87%;
+  right: 25%;
   font-weight: 200;
 }
 
@@ -264,7 +317,7 @@ h1.right{
     padding: 2px 6px;
     border-radius: 4px;
     transition: all 0.3s ease;
-    color: #fff;
+    color: #010400;
 }
 
 .hover-underline::after {
@@ -279,7 +332,7 @@ h1.right{
 }
 
 .hover-underline:hover {
-    background-color: rgba(131, 120, 138, 0.2);
+    background-color: rgba(242, 150, 113, 0.2);
     color: #e8e1ed;
 }
 
@@ -327,6 +380,200 @@ h1.right{
 /* Adjust nav gap to accommodate the new button */
 nav {
     gap: 40px;  /* Slightly reduced from 50px to fit the new item */
+}
+
+/* Button Hover Effects */
+.light-btn, .btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    transform: scale(1);
+}
+
+.light-btn:hover, .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.light-btn::before, .btn::before {
+    content: '';
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.light-btn:hover::before, .btn:hover::before {
+    width: 250px;
+    height: 250px;
+}
+
+/* Cute Cart Popup Styles */
+.cart-popup {
+    position: fixed;
+    top: 70px;
+    right: -320px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 5px 10px;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    backdrop-filter: blur(8px);
+}
+
+.cart-popup.show {
+    right: 30px;
+    opacity: 1;
+}
+
+.popup-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 150px;
+}
+
+.popup-icon {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    background: #FE783D;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-icon i {
+    font-size: 18px;
+    color: white;
+}
+
+.check-mark {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 18px;
+    height: 18px;
+    background: #4CAF50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: white;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+}
+
+.cart-popup.show .check-mark {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.popup-message {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.product-name {
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.success-text {
+    color: #4CAF50;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Updated Social Media Icons Styles - Left Corner Position */
+.social {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    display: flex;
+    gap: 20px;
+    z-index: 10;
+}
+
+.social-icon {
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation for social icons */
+.social-icon {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.social-icon:nth-child(1) { animation-delay: 0.1s; }
+.social-icon:nth-child(2) { animation-delay: 0.2s; }
+.social-icon:nth-child(3) { animation-delay: 0.3s; }
+.social-icon:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .social {
+        bottom: 20px;
+        left: 20px;
+        gap: 15px;
+    }
+
+    .social-icon {
+        font-size: 18px;
+        width: 34px;
+        height: 34px;
+    }
+}
+
+@media (max-width: 480px) {
+    .social {
+        bottom: 15px;
+        left: 15px;
+        gap: 12px;
+    }
+
+    .social-icon {
+        font-size: 16px;
+        width: 30px;
+        height: 30px;
+    }
 }
 
 
