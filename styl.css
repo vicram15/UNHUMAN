@@ -576,4 +576,10 @@ nav {
     }
 }
 
+/* Reduced image size for Dark Academia page */
+.swiper-slide img[src*="D2.png"] {
+    transform: scale(0.9); /* Reduces size by 10% */
+    transform-origin: center bottom; /* Keeps image anchored at bottom center */
+}
+
 
