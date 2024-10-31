@@ -82,6 +82,7 @@ canvas{
     z-index: 99;
     padding: 0px 30px;
 }
+
 #nav>h3{
     font-family: gilroy;
     font-weight: 400;
@@ -95,6 +96,22 @@ canvas{
     color: #e09a03;
     border: none;
 }
+#nav>button {
+    padding: 10px 20px;
+    border-radius: 50px;
+    background-color: #fafdb1;
+    color: #e09a03;
+    border: none;
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#nav>button:hover {
+    background-color: #e09a03; /* Darker color on hover */
+    color: #fafdb1; /* Inverse color for text */
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
 #page>h3{
     position: absolute;
     top: 65%;
@@ -185,4 +202,20 @@ canvas{
     color: #fafdb1;
     font-weight: 300;
     font-size: 50px;
+}
+/* Responsive Styles */
+@media (max-width: 768px) {
+    #loop {
+        font-size: 60px;
+    }
+    #page1>#right-text>h1,
+    #page1>#left-text>h1,
+    #page2>#text1>h1,
+    #page3>#text3>h1 {
+        font-size: 30px;
+    }
+    #nav>button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
 }

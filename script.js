@@ -444,4 +444,7 @@ gsap.to("#page3",{
     pin:true,
     scroller:`#main`
   }
-})
+});
+document.getElementById("launchBtn").addEventListener("click", () => {
+  window.location.href = "newpage.html";  // Replace with the actual target page
+});
